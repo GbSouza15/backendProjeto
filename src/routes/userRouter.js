@@ -1,16 +1,30 @@
 const Router = require("express");
 const userController = require('../controllers/userController')
+const productController = require('../controllers/productController')
 const checkToken = require('../middleware/checkToken')
 
 const router = new Router()
 
-router.get('/user', userController.getAllUsers) // Lista todos os users
-router.post('/user/register', userController.registerUser) // Registra um novo user
-router.post('/user/login', userController.login) // Faz login no usuário
-router.get('/product', userController.getAllProducts) // Lista todos os produtos
-router.get('/product/:authorId', userController.getProductId) // Lista produtos pelo id passado
-router.post('/product/create', checkToken, userController.newProduct) // Cria um novo produto
-router.delete('/product/remove/:id', userController.deleteProduct) // Deleta um produto
+// Lista todos os users
+router.get('/user', userController.getAllUsers) 
+
+// Registra um novo user
+router.post('/user/register', userController.registerUser) 
+
+// Faz login do usuário
+router.post('/user/login', userController.login) 
+
+// Lista todos os produtos
+router.get('/product', productController.getAllProducts) 
+
+// Lista produtos pelo id passado
+router.get('/product/:authorId', productController.getProductId) 
+
+// Cria um novo produto
+router.post('/product/create', checkToken, productController.newProduct) 
+
+// Rota para deletar produtos do usuário
+router.delete('/product/remove/:id', checkToken, productController.removeProduct)
 
 module.exports = router
 
