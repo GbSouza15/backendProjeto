@@ -62,7 +62,7 @@ const login = async (req, res) => {
     if(!checkPassword) {
         return res.status(401).json({msg: "Senha inválida"})
     }
-
+ 
     try {
  
         const secret = process.env.SECRET

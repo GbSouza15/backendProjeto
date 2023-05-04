@@ -6,7 +6,7 @@ const newProduct = async (req, res) => {
 
     try {
         const userId = req.userId
-
+ 
         const product = await prisma.product.create({
             data: {
                 ...body,

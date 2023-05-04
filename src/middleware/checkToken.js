@@ -12,7 +12,7 @@ const checkToken = async (req, res, next) => {
         const secret = process.env.SECRET
         const decoded = jwt.verify(token, secret)
         const userId = decoded.id
-        req.userId = userId
+        req.userId = userId 
         next()
     } catch (err) {
         res.status(400).json({msg: "Token inválido"})

@@ -11,7 +11,7 @@ router.get('/user', userController.getAllUsers)
 // Registra um novo user
 router.post('/user/register', userController.registerUser) 
 
-// Faz login do usuário
+// Faz login do usuário 
 router.post('/user/login', userController.login) 
 
 // Lista todos os produtos
