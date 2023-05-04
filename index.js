@@ -7,7 +7,7 @@ app.use(express.json())
 app.use(userRoutes)
 app.use(cors)
 
-const PORT = process.env.URL || 3030
+const PORT = process.env.URL || 5000
 
 app.listen(PORT, () => {
     console.log(`Server is runing or port: ${PORT}`);
