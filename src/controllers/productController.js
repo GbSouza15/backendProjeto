@@ -3,13 +3,9 @@ const jwt = require('jsonwebtoken')
 
 const newProduct = async (req, res) => {
     const { body } = req
-    const authHeader = req.headers['authorization']
-    const token = authHeader && authHeader.split(' ')[1]
 
     try {
-        const secret = process.env.SECRET
-        const decoded = jwt.verify(token, secret)
-        const userId = decoded.id
+        const userId = req.userId
 
         const product = await prisma.product.create({
             data: {
@@ -32,11 +28,7 @@ const newProduct = async (req, res) => {
 }
 
 const removeProduct = async (req, res) => {
-    const authHeader = req.headers['authorization']
-    const token = authHeader && authHeader.split(' ')[1]
-    const secret = process.env.SECRET
-    const decoded = jwt.verify(token, secret)
-    const userId = decoded.id
+    const userId = req.userId
     const { id } = req.params 
 
     try {
