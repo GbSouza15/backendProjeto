@@ -1,7 +1,8 @@
 const Router = require("express");
 const userController = require('../controllers/userController')
 const productController = require('../controllers/productController')
-const checkToken = require('../middleware/checkToken')
+const checkToken = require('../middleware/checkToken');
+const upload = require("../multer/multerConfig");
 
 const router = new Router()
 
@@ -21,11 +22,9 @@ router.get('/product', productController.getAllProducts)
 router.get('/product/:authorId', productController.getProductId) 
 
 // Cria um novo produto
-router.post('/product/create', checkToken, productController.newProduct) 
+router.post('/product/create', checkToken, upload.single('file'), productController.newProduct) 
 
 // Rota para deletar produtos do usuário
 router.delete('/product/remove/:id', checkToken, productController.removeProduct)
 
 module.exports = router
-
-

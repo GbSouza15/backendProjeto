@@ -1,15 +1,39 @@
 const prisma = require('../databases')
 const jwt = require('jsonwebtoken')
+const { body, validationResult } = require('express-validator');
 
 const newProduct = async (req, res) => {
-    const { body } = req
+    const { name, price, description } = req.body
+
+    await body('file')
+    .custom((value, { req }) => {
+      if (!req.file) {
+        throw new Error('Selecione um arquivo para upload');
+      }
+      if (!req.file.mimetype.startsWith('image/')) {
+        throw new Error('Somente arquivos de imagem são permitidos');
+      }
+      return true;
+    })
+    .run(req);
+
+  // Verifica se houve algum erro de validação
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
 
     try {
         const userId = req.userId
+        const imgUrl = req.file.path
  
         const product = await prisma.product.create({
             data: {
-                ...body,
+                name,
+                price,
+                description,
+                img: imgUrl,
+
                 author: {
                     connect: {
                         id: userId
@@ -17,6 +41,12 @@ const newProduct = async (req, res) => {
                 }
             }
         })
+
+        // const productWithImageUrl = {
+        //     ...product,
+        //     img: `${req.protocol}://${req.get('host')}/${product.img}`
+        //   };
+        
 
         return res.status(201).json(product)
 
