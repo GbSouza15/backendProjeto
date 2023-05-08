@@ -21,7 +21,7 @@ model User {
 model Product {
   id Int @id @default(autoincrement())
   name String
-  price Float
+  price String
   description String
   img String?
   author User @relation(fields: [authorId], references: [id])
