@@ -9,6 +9,9 @@ const router = new Router()
 // Lista todos os users
 router.get('/user', userController.getAllUsers) 
 
+// Lista um user pelo seu id
+router.get('/user/:id', userController.getUserId)
+
 // Registra um novo user
 router.post('/user/register', userController.registerUser) 
 

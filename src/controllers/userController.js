@@ -87,8 +87,21 @@ const getAllUsers = async (req, res) => {
     return res.status(200).json(user)
 }
 
+const getUserId = async (req, res) => {
+    const { id } = req.params
+
+    const user = await prisma.user.findFirst({
+        where: {
+            id: Number(id)
+        }
+    })
+
+    return res.status(200).json(user)
+}
+
 module.exports = {
     getAllUsers,
     registerUser,
-    login
+    login,
+    getUserId
 }
