@@ -5,7 +5,7 @@ const validator = require('validator')
 
 
 const registerUser = async(req, res) => {
-    const {email, password, name} = req.body
+    const {email, password, name, phone } = req.body
 
     const verifyUserExist = await prisma.user.findFirst({
         where: {
@@ -36,7 +36,8 @@ const registerUser = async(req, res) => {
         data: {
             email,
             password: passwordHash,
-            name
+            name, 
+            phone
         }
     })
 
