@@ -95,6 +95,29 @@ const getAllProducts = async (req, res) => {
 }
 
 const getProductId = async (req, res) => {
+    const { id } = req.params
+
+    try {
+
+        const product = await prisma.product.findFirst({
+            where: {
+                id: Number(id)
+            }
+        })
+
+        if (!product) {
+            return res.status(404).json({msg: "Produto não encontrado"})
+        }
+
+
+        return res.status(200).json(product)
+
+    } catch(error) {
+        console.log(error);
+    }
+}
+
+const getProductAuthId = async (req, res) => {
     const { authorId } = req.params
     const product = await prisma.product.findMany({
         where: {
@@ -102,13 +125,13 @@ const getProductId = async (req, res) => {
         }
     })
 
-    console.log(authorId);
     return res.status(200).json(product)
 }
 
 module.exports = {
     newProduct,
     getAllProducts,
-    getProductId,
-    removeProduct
+    getProductAuthId,
+    removeProduct,
+    getProductId
 }
