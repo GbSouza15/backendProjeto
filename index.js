@@ -5,8 +5,8 @@ const cors = require('cors')
 const app = express()
 app.use(express.json())
 app.use(cors());
+app.use('/files', express.static(__dirname + "/uploads"))
 app.use(userRoutes)
-app.use('/files', express.static('uploads'))
 const PORT = process.env.PORT || 3030
 
 app.listen(PORT, () => {
