@@ -16,5 +16,20 @@
   "scripts": {
     "dev": "nodemon index.js",
     "start": "node index.js"
-  }
+  },
+  "name": "backendssq",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GbSouza15/backendSSQ.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GbSouza15/backendSSQ/issues"
+  },
+  "homepage": "https://github.com/GbSouza15/backendSSQ#readme",
+  "description": ""
 }
